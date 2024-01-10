@@ -1,5 +1,6 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+casino_games:
+  path: /casino/games
+  controller: 'App\Controller\Games\CasinoGamesController::index'
+index:
+  path: /
+  controller: 'App\Controller\HomeController::index'

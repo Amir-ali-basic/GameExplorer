@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Casino Games{% endblock %}
+
+{% block body %}
+    <h1>Casino Games</h1>
+    
+    {# Include the GameExplorer component and pass the games data to it #}
+    {% include '@components/GamesExplorer.html.twig' with {'games': games} %}
+{% endblock %}

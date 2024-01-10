@@ -1,0 +1,25 @@
+<div class="game-card">
+    <div class="game-image">
+        <img src="{{ game.icon2|default('default-image.jpg') }}" alt="{{ game.name }}">
+    </div>
+    <div class="game-info">
+        {{ game.status }}
+        <h3 class="game-title">{{ game.title }}</h3>
+        {% if game.categories|default([]) is not empty %}
+            <div class="game-category">
+                {% for category in game.categories %}
+                    <span>{{ category }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if game.themes|default([]) is not empty %}
+            <div class="game-theme">
+                {% for theme in game.themes %}
+                    <span>{{ theme }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="game-provider">{{ game.provider }}</div>
+        <button class="play-button">Play Now</button>
+    </div>
+</div>
