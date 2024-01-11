@@ -7,3 +7,12 @@ index:
 load_games_by_category:
   path: /games/casino/loadGamesByCategory/{categoryId}
   controller: 'App\Controller\Games\CasinoGamesController::loadGamesByCategory'
+search_games_by_name:
+  path: /games/casino/search
+  controller: 'App\Controller\Games\CasinoGamesController::searchGames'
+all_casino_games:
+  path: /games/casino/all
+  controller: 'App\Controller\Games\CasinoGamesController::getAllGames'
+load_games_by_provider:
+  path: /games/casino/loadGamesByProvider/{provider}
+  controller: 'App\Controller\Games\CasinoGamesController::loadGamesByProvider'

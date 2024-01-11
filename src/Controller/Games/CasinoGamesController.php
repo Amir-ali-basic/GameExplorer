@@ -2,6 +2,7 @@
 
 namespace App\Controller\Games;
 
+use Symfony\Component\HttpFoundation\Request;
 use App\Service\Games\GamesApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class CasinoGamesController extends AbstractController
     {
         $this->gameApiService = $gameApiService;
     }
-
+    //reorganize this function
     #[Route('/games/casino', name: 'casino_games')]
     public function index(): Response
     {
@@ -25,7 +26,7 @@ class CasinoGamesController extends AbstractController
         $originalCategories = $this->gameApiService->getCategories();
         $popularGames = $this->gameApiService->getGamesByCategoryId(95);
         $providersData = [];
-
+        $gamesByCategory = [];
         $categoriesData = []; // Initialize an array to store category data (ID and Title)
 
         foreach ($gamesData as $game) {
@@ -47,6 +48,7 @@ class CasinoGamesController extends AbstractController
                                 'id' => $categoryId,
                                 'title' => $categoryTitle,
                             ];
+                            $gamesByCategory[$categoryTitle][] = $game->toArray();
                         }
                     }
                 }
@@ -61,6 +63,7 @@ class CasinoGamesController extends AbstractController
             'categories' => $categoriesData,
             'popularGames' => $popularGames,
             'providers' => $providersData,
+            'gamesByCategory' => $gamesByCategory,
         ]);
     }
     #[Route('/games/casino/loadGamesByCategory/{categoryId}', name: 'load_games_by_category')]
@@ -74,4 +77,41 @@ class CasinoGamesController extends AbstractController
 
         return new JsonResponse($gamesArray);
     }
+    #[Route('/games/casino/search', name: 'search_casino_games')]
+    public function searchGames(Request $request): JsonResponse
+    {
+        $searchTerm = $request->query->get('name', '');
+
+        $gamesData = $this->gameApiService->getGamesByName($searchTerm);
+
+        $gamesArray = array_map(function ($game) {
+            return $game->toArray();
+        }, $gamesData);
+
+        return new JsonResponse($gamesArray);
+    }
+    #[Route('/games/casino/all', name: 'all_casino_games')]
+    public function getAllGames(): JsonResponse
+    {
+        $gamesData = $this->gameApiService->getGames();
+
+        $gamesArray = array_map(function ($game) {
+            return $game->toArray();
+        }, $gamesData);
+
+        return new JsonResponse($gamesArray);
+    }
+
+    #[Route('/games/casino/loadGamesByProvider/{provider}', name: 'load_games_by_provider')]
+    public function loadGamesByProvider(GamesApiService $gameApiService, string $provider): JsonResponse
+    {
+        $gamesData = $gameApiService->getGamesByProvider($provider);
+
+        $gamesArray = array_map(function ($game) {
+            return $game->toArray();
+        }, $gamesData);
+
+        return new JsonResponse($gamesArray);
+    }
+
 }

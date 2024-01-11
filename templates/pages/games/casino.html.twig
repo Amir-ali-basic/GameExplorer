@@ -2,38 +2,52 @@
 
 {% block title %}Casino Games{% endblock %}
 {% block body %}
-<h1>Casino Games</h1>
-<div class="casino-header-components">
-
-{% include 'components/GamesSlider.html.twig' with {'title': 'Popular games', 'brojSlajdova': 3, 'popularGames': popularGames} %}
-
-    {# <div class="provaiders-container">
-        <h3 class="popular-games-title">Popular providers</h3>
-        <div class="casino-games-providers-wrapper">
-            {% for provider in providers %}
-            <div class="casino-games-providers">
-                {{provider}}
-            </div>
-            {% endfor %}
-        </div>
-    </div> #}
-</div>
-
-    <nav>
-        <ul>
-            <li><a href="{{ path('casino_games') }}">EXPLORE ALL GAMES</a></li>
-            {% for category in categories %}
-             <li><a href="#" class="category-link" data-category-id="{{ category.id }}">{{ category.title }}</a></li>
-            {% endfor %}
-        </ul>
-    </nav>
-    
-    {# Display games related to the selected category #}
-    <div class="games-list" id="games-container">
-        {% for game in games %}
-            {% include 'components/GamesCard.html.twig' with {'game': game} %}
-        {% endfor %}
+<div class="main-container">
+    <h1>Casino Games</h1>
+    <div class="casino-header-components">
+        {% include 'components/GamesSlider.html.twig' with {'title': 'Popular games', 'brojSlajdova': 3, 'popularGames': popularGames} %}
     </div>
-    {# Na dnu vašeg Twig template-a #}
+    <div class="games-navigation">
+        <div><a href="{{ path('casino_games') }}">Explore games</a></div>
+        <div><a href="{{ path('casino_games') }}">Casino games</a></div>
+        <div><a href="{{ path('casino_games') }}">Favorite games</a></div>
+    </div>
+    <div class="csaino-games-content">
+        <div class="casino-games-search-container">
+            <div class="casino-games-search">
+                <input type="text" id="casino-search-input" placeholder="Search games...">
+            </div>
+            <div class="casino-games-dropdown">
+                <select id="category-dropdown">
+                    {% for category in categories %}
+                        <option class="category-dropdown-option" value="{{ category.id }}">{{ category.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div> 
+        <div>
+        <div class="provaiders-container">
+            <h3 class="popular-games-title">Popular providers</h3>
+            <div class="casino-games-providers-wrapper">
+                {% for provider in providers %}
+                    <div class="casino-games-providers" data-provider="{{ provider }}">
+                        {{provider}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+            {# Display games related to the selected category #}
+            <div class="games-list" id="games-container">
+                {% for game in games %}
+                    {% include 'components/GamesCard.html.twig' with {'game': game} %}
+                {% endfor %}
+
+                {# {% for categoryTitle, games in gamesByCategory %}
+                    {% include 'components/GamesByCategory.html.twig' with {'categoryTitle': categoryTitle, 'games': games} %}
+                {% endfor %} #}
+            </div>
+    </div>
+</div>
 
 {% endblock %}

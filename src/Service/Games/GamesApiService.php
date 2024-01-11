@@ -63,4 +63,43 @@ class GamesApiService
 
         return []; // Handle the error or return an empty array
     }
+    public function getGamesByName($name)
+    {
+        $url = 'https://casino-games-api.united-remote.dev/games/getByName?name=' . urlencode($name);
+        $response = $this->httpClient->request('GET', $url);
+
+        if ($response->getStatusCode() === 200) {
+            $gamesData = $response->toArray();
+
+            $games = [];
+            foreach ($gamesData as $gameData) {
+                $game = new GameModel($gameData);
+                $games[] = $game;
+            }
+
+            return $games;
+        }
+
+        return []; // Handle the error or return an empty array
+    }
+
+    public function getGamesByProvider($provider)
+    {
+        $url = 'https://casino-games-api.united-remote.dev/games/getByProvider?provider=' . $provider;
+        $response = $this->httpClient->request('GET', $url);
+
+        if ($response->getStatusCode() === 200) {
+            $gamesData = $response->toArray();
+
+            $games = [];
+            foreach ($gamesData as $gameData) {
+                $game = new GameModel($gameData);
+                $games[] = $game;
+            }
+
+            return $games;
+        }
+
+        return []; // Handle the error or return an empty array
+    }
 }
