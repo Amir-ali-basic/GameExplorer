@@ -28,18 +28,22 @@ body {
   color: #bdbdbd;
   text-decoration: none;
 }
-
-.casino-games-search-container {
-  width: 100%;
+.casino-filters {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 4rem;
   margin-bottom: 1.5rem;
 }
-.casino-games-search {
+
+.casino-games-search-container {
   width: calc(75% - 2rem);
 }
+
+.casino-games-search {
+  width: 100%;
+}
+
 .casino-games-search #casino-search-input {
   height: 3rem;
   width: 100%;
@@ -51,10 +55,10 @@ body {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
-.casino-games-search-container .casino-games-dropdown {
+.casino-games-dropdown {
   width: 25%;
 }
-.casino-games-search-container .casino-games-dropdown #category-dropdown {
+.casino-games-dropdown #category-dropdown {
   height: 3rem;
   background-color: #191919;
   outline: none;
@@ -162,10 +166,10 @@ body {
   align-items: center;
   gap: 1.5rem;
 }
-.popular-games-container {
+.slider {
   width: 100%;
 }
-.popular-games-title {
+.slider-title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,13 +179,10 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.popular-games {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding-top: 1rem;
+.provaiders-title {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
 .swiper-slide .game-card {
@@ -215,6 +216,6 @@ body {
 }
 
 .casino-games-providers-wrapper {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }

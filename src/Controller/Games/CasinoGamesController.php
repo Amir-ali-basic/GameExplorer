@@ -27,10 +27,9 @@ class CasinoGamesController extends AbstractController
         $popularGames = $this->gameApiService->getGamesByCategoryId(95);
         $providersData = [];
         $gamesByCategory = [];
-        $categoriesData = []; // Initialize an array to store category data (ID and Title)
+        $categoriesData = [];
 
         foreach ($gamesData as $game) {
-            // Use methods from GameModel to access data
             $gameCategories = $game->getCats();
             $provider = $game->getProviderTitle();
 

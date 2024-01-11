@@ -1,0 +1,15 @@
+<select id="{{ dropdownId }}">
+    {% for option in options %}
+        <option value="{{ option[value] }}">{{ option[label] }}</option>
+    {% endfor %}
+</select>
+
+<script>
+    const dropdown = document.getElementById("{{ dropdownId }}");
+    const selectElement = dropdown.querySelector("select");
+
+    selectElement.addEventListener("change", function () {
+        const selectedValue = selectElement.value;
+        {{ onSelect }}(selectedValue);
+    });
+</script>

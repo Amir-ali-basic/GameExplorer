@@ -1,6 +1,9 @@
+import { showLoading, hideLoading } from "./globalFunctions.js";
+import { initializeSearchComponent } from "./components/searchComponent.js";
+import { initializeDropdownComponent } from "./components/dropDownComponent.js";
+
 document.addEventListener("DOMContentLoaded", function () {
   const categoryDropdown = document.getElementById("category-dropdown");
-  const searchInput = document.getElementById("casino-search-input");
   const gamesContainer = document.getElementById("games-container");
   const providerElements = document.querySelectorAll(".casino-games-providers");
 
@@ -9,15 +12,18 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchGamesByCategory(categoryDropdown.value);
   });
 
-  // Event listener for search
-  searchInput.addEventListener("input", debounceSearchInput);
-
   // Event listener for provideer
   providerElements.forEach((element) => {
     element.addEventListener("click", function () {
       fetchGamesByProvider(element.getAttribute("data-provider"));
     });
   });
+
+  // Event listener for search
+  function searchGames(searchText) {
+    const url = `/games/casino/search?name=${encodeURIComponent(searchText)}`;
+    performFetch(url);
+  }
 
   function fetchGamesByCategory(categoryId) {
     performFetch(`/games/casino/loadGamesByCategory/${categoryId}`);
@@ -66,31 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
     return gameCardDiv;
   }
 
-  function debounceSearchInput() {
-    clearTimeout(debounceSearchInput.debounceTimer);
-    debounceSearchInput.debounceTimer = setTimeout(() => {
-      const searchText = searchInput.value;
-      if (searchText.length > 2) {
-        performFetch(
-          `/games/casino/search?name=${encodeURIComponent(searchText)}`
-        );
-      } else if (searchText.length === 0) {
-        fetchAllGames();
-      }
-    }, 300);
-  }
-
-  function showLoading() {
-    // Kod za prikazivanje indikatora učitavanja
-  }
-
-  function hideLoading() {
-    // Kod za skrivanje indikatora učitavanja
-  }
+  initializeSearchComponent(
+    "casino-search-input",
+    "Search games...",
+    searchGames
+  );
 
   function handleError(error) {
     console.error("Error:", error);
     hideLoading();
-    // Dodatni kod za prikaz greške korisniku
   }
 });
