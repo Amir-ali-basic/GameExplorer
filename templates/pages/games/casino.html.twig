@@ -1,10 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Casino Games{% endblock %}
-
 {% block body %}
-    <h1>Casino Games</h1>
+<h1>Casino Games</h1>
+<div class="casino-header-components">
+
+{% include 'components/GamesSlider.html.twig' with {'title': 'Popular games', 'brojSlajdova': 3, 'popularGames': popularGames} %}
+
+    {# <div class="provaiders-container">
+        <h3 class="popular-games-title">Popular providers</h3>
+        <div class="casino-games-providers-wrapper">
+            {% for provider in providers %}
+            <div class="casino-games-providers">
+                {{provider}}
+            </div>
+            {% endfor %}
+        </div>
+    </div> #}
+</div>
+
+    <nav>
+        <ul>
+            <li><a href="{{ path('casino_games') }}">EXPLORE ALL GAMES</a></li>
+            {% for category in categories %}
+             <li><a href="#" class="category-link" data-category-id="{{ category.id }}">{{ category.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
     
-    {# Include the GameExplorer component and pass the games data to it #}
-    {% include '@components/GamesExplorer.html.twig' with {'games': games} %}
+    {# Display games related to the selected category #}
+    <div class="games-list" id="games-container">
+        {% for game in games %}
+            {% include 'components/GamesCard.html.twig' with {'game': game} %}
+        {% endfor %}
+    </div>
+    {# Na dnu vašeg Twig template-a #}
+
 {% endblock %}

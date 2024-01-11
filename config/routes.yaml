@@ -1,6 +1,9 @@
 casino_games:
-  path: /casino/games
+  path: /games/casino
   controller: 'App\Controller\Games\CasinoGamesController::index'
 index:
   path: /
   controller: 'App\Controller\HomeController::index'
+load_games_by_category:
+  path: /games/casino/loadGamesByCategory/{categoryId}
+  controller: 'App\Controller\Games\CasinoGamesController::loadGamesByCategory'

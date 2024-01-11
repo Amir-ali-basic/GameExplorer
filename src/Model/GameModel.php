@@ -58,43 +58,176 @@ class GameModel
         $this->background = isset($data['background']) ? $data['background'] : null;
         $this->types = isset($data['types']) ? $data['types'] : null;
         $this->gameSkinId = isset($data['game_skin_id']) ? $data['game_skin_id'] : null;
-        $this->cats = isset($data['cats']) ? $data['cats'] : null;
+        $this->cats = isset($data['cats']) ? $data['cats'] : [];
         $this->feats = isset($data['feats']) ? $data['feats'] : null;
         $this->thms = isset($data['thms']) ? $data['thms'] : null;
         $this->active = isset($data['active']) ? $data['active'] : null;
     }
-    public function getName()
+    public function getCategories()
     {
-        return $this->name;
+        return $this->categories;
     }
+
+    public function getFeatures()
+    {
+        return $this->features;
+    }
+
+    public function getThemes()
+    {
+        return $this->themes;
+    }
+
     public function getIcons()
     {
         return $this->icons;
+    }
+
+    public function getBackgrounds()
+    {
+        return $this->backgrounds;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getServerGameId()
+    {
+        return $this->serverGameId;
+    }
+
+    public function getExternalGameId()
+    {
+        return $this->externalGameId;
+    }
+
+    public function getFrontGameId()
+    {
+        return $this->frontGameId;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getTitle()
     {
         return $this->title;
     }
-    public function getCategories()
+
+    public function getRatio()
     {
-        return $this->categories;
+        return $this->ratio;
     }
-    public function getThemes()
+
+    public function getStatus()
     {
-        return $this->themes;
+        return $this->status;
     }
+
     public function getProvider()
     {
         return $this->provider;
     }
+
+    public function getShowAsProvider()
+    {
+        return $this->showAsProvider;
+    }
+
+    public function getProviderTitle()
+    {
+        return $this->providerTitle;
+    }
+
+    public function getGameOptions()
+    {
+        return $this->gameOptions;
+    }
+
+    public function getBlockedCountries()
+    {
+        return $this->blockedCountries;
+    }
+
+    public function getHasAgeRestriction()
+    {
+        return $this->hasAgeRestriction;
+    }
+
     public function getIcon2()
     {
         return $this->icon2;
     }
-    public function getStatus()
+
+    public function getBackground()
     {
-        return $this->status;
+        return $this->background;
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
+    public function getGameSkinId()
+    {
+        return $this->gameSkinId;
+    }
+
+    public function getCats()
+    {
+        return $this->cats;
+    }
+
+    public function getFeats()
+    {
+        return $this->feats;
+    }
+
+    public function getThms()
+    {
+        return $this->thms;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+    public function toArray()
+    {
+        return [
+            'categories' => $this->getCategories(),
+            'features' => $this->getFeatures(),
+            'themes' => $this->getThemes(),
+            'icons' => $this->getIcons(),
+            'backgrounds' => $this->getBackgrounds(),
+            'id' => $this->getId(),
+            'serverGameId' => $this->getServerGameId(),
+            'externalGameId' => $this->getExternalGameId(),
+            'frontGameId' => $this->getFrontGameId(),
+            'name' => $this->getName(),
+            'title' => $this->getTitle(),
+            'ratio' => $this->getRatio(),
+            'status' => $this->getStatus(),
+            'provider' => $this->getProvider(),
+            'showAsProvider' => $this->getShowAsProvider(),
+            'providerTitle' => $this->getProviderTitle(),
+            'gameOptions' => $this->getGameOptions(),
+            'blockedCountries' => $this->getBlockedCountries(),
+            'hasAgeRestriction' => $this->getHasAgeRestriction(),
+            'icon2' => $this->getIcon2(),
+            'background' => $this->getBackground(),
+            'types' => $this->getTypes(),
+            'gameSkinId' => $this->getGameSkinId(),
+            'cats' => $this->getCats(),
+            'feats' => $this->getFeats(),
+            'thms' => $this->getThms(),
+            'active' => $this->getActive()
+        ];
     }
 
 }

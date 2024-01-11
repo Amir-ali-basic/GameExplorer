@@ -1,3 +1,11 @@
+body {
+  background-color: #000;
+  color: white;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+}
+
 .game-explorer {
   padding: 20px;
 }
@@ -5,51 +13,147 @@
 .games-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust as needed */
+  gap: 20px;
   justify-content: center;
 }
 
 .game-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ddd;
+  position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(20% - 20px);
 }
-
-.game-image img {
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.game-wrapper .game-image {
   width: 100%;
-  height: auto;
+  position: relative;
+}
+.game-wrapper .game-image img {
+  width: 100%;
+  height: 100%;
 }
 
-.game-info {
-  padding: 15px;
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .game-card {
+    width: calc(25% - 20px); /* 4 cards per row */
+  }
+}
+
+@media (max-width: 992px) {
+  .game-card {
+    width: calc(33.333% - 20px); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 768px) {
+  .game-card {
+    width: calc(50% - 20px); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 576px) {
+  .game-card {
+    width: 100%; /* 1 card per row */
+  }
+}
+
+.casino-header-components {
+  position: relative;
+  background-image: url("../images/popular-games-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-clip: border-box;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+.popular-games-container {
+  width: 100%;
+}
+.popular-games-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: white;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.popular-games {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.provaiders-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+}
+.casino-games-providers-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  justify-content: center;
+  align-items: center;
+}
+.casino-games-providers {
+  border-radius: 10px;
+  padding: 30px;
+  gap: 1rem;
+  background-color: #191919;
+  min-width: 250px;
 }
 
-.game-title {
-  font-size: 1.2em;
-  margin-bottom: 5px;
+.swiper-slide .game-card {
+  width: 100% !important;
 }
 
-.game-category,
-.game-theme,
-.game-provider {
-  font-size: 0.9em;
-  color: #666;
+nav {
+  padding: 10px; /* Malo prostora oko sadržaja */
 }
 
-.play-button {
-  margin-top: auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  align-self: center;
+nav ul {
+  list-style: none; /* Uklanja točke iz liste */
+  padding: 0; /* Uklanja unutarnji razmak */
+  margin: 0; /* Uklanja vanjski razmak */
+  display: flex; /* Flexbox za horizontalno poravnavanje */
+  overflow-x: auto; /* Omogućuje horizontalno skrolanje */
+  white-space: nowrap; /* Sprečava prelamanje stavki u novi red */
+}
+
+nav ul li {
+  margin-right: 20px; /* Razmak između stavki */
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+nav ul li:last-child {
+  margin-right: 0; /* Uklanja razmak za posljednju stavku */
+}
+
+nav a {
+  text-decoration: none; /* Uklanja podcrtavanje linkova */
+  color: white; /* Boja teksta */
+  font-size: 16px; /* Veličina teksta */
+}
+
+/* Stil za hover efekt na linkovima */
+nav a:hover {
+  color: #007bff; /* Plava boja za hover */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
 }

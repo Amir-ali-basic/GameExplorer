@@ -1,0 +1,32 @@
+<div class="popular-games-container">
+    <h3 class="popular-games-title">{{ title }}</h3>
+    
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            {% for popularGame in popularGames %}
+                <div class="swiper-slide">
+                    {% include 'components/GamesCard.html.twig' with {'game': popularGame} %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var brojSlajdova = {{ brojSlajdova }}; // Definišite brojSlajdova iz parametra
+
+    var mySwiper = new Swiper('.mySwiper', {
+      slidesPerView: brojSlajdova,
+      spaceBetween: 20,
+      loop: true,
+      pagination: false,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // Dodatne opcije Swiper-a možete dodati ovdje
+    });
+  });
+</script>
