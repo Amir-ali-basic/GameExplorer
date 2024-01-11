@@ -16,3 +16,6 @@ all_casino_games:
 load_games_by_provider:
   path: /games/casino/loadGamesByProvider/{provider}
   controller: 'App\Controller\Games\CasinoGamesController::loadGamesByProvider'
+games_filtered_by_category:
+  path: /games/casino/gamesFilteredByCategory
+  controller: 'App\Controller\Games\CasinoGamesController::loadAllGamesByCategory'

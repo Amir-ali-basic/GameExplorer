@@ -26,7 +26,6 @@ class CasinoGamesController extends AbstractController
         $originalCategories = $this->gameApiService->getCategories();
         $popularGames = $this->gameApiService->getGamesByCategoryId(95);
         $providersData = [];
-        $gamesByCategory = [];
         $categoriesData = [];
 
         foreach ($gamesData as $game) {
@@ -47,7 +46,6 @@ class CasinoGamesController extends AbstractController
                                 'id' => $categoryId,
                                 'title' => $categoryTitle,
                             ];
-                            $gamesByCategory[$categoryTitle][] = $game->toArray();
                         }
                     }
                 }
@@ -62,9 +60,9 @@ class CasinoGamesController extends AbstractController
             'categories' => $categoriesData,
             'popularGames' => $popularGames,
             'providers' => $providersData,
-            'gamesByCategory' => $gamesByCategory,
         ]);
     }
+
     #[Route('/games/casino/loadGamesByCategory/{categoryId}', name: 'load_games_by_category')]
     public function loadGamesByCategory(GamesApiService $gameApiService, int $categoryId): JsonResponse
     {
@@ -111,6 +109,31 @@ class CasinoGamesController extends AbstractController
         }, $gamesData);
 
         return new JsonResponse($gamesArray);
+    }
+    #[Route('/games/casino/gamesFilteredByCategory', name: 'games_filtered_by_category')]
+    public function loadAllGamesByCategory(GamesApiService $gameApiService): JsonResponse
+    {
+        $gamesData = $gameApiService->getGames();
+        $originalCategories = $gameApiService->getCategories();
+        $gamesByCategory = [];
+
+        foreach ($gamesData as $game) {
+            $gameCategories = $game->getCats();
+            if ($gameCategories) {
+                foreach ($gameCategories as $category) {
+                    if ($category['type'] === 'category') {
+                        $categoryId = $category['id'];
+                        if (in_array($categoryId, $originalCategories)) {
+                            $categoryTitle = $category['title'];
+                            $gamesByCategory[$categoryTitle][] = $game->toArray();
+                        }
+                    }
+                }
+            }
+        }
+        dd($gamesByCategory);
+
+        return new JsonResponse($gamesByCategory);
     }
 
 }
