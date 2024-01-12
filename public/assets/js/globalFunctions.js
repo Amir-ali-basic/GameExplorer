@@ -1,9 +1,19 @@
 function showLoading() {
-  console.log("loading");
+  const loaderContainer = document.getElementById("loader-container");
+  if (loaderContainer) {
+    loaderContainer.style.display = "flex";
+  }
 }
 
 function hideLoading() {
-  console.log("not loding");
+  const loaderContainer = document.getElementById("loader-container");
+  if (loaderContainer) {
+    loaderContainer.style.display = "none";
+  }
 }
+
+window.onload = function () {
+  hideLoading();
+};
 
 export { showLoading, hideLoading };

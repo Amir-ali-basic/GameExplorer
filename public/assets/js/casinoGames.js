@@ -23,8 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for search
   function searchGames(searchText) {
-    const url = `/games/casino/search?name=${encodeURIComponent(searchText)}`;
-    performFetch(url);
+    console.log("searchText", searchText);
+    if (searchText.trim() === "") {
+      fetchAllGames();
+    } else {
+      const url = `/games/casino/search?name=${encodeURIComponent(searchText)}`;
+      performFetch(url);
+    }
   }
 
   function fetchGamesByCategory(categoryId) {
@@ -42,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function performFetch(url) {
-    showLoading();
     fetch(url).then(handleResponse).then(updateGamesList).catch(handleError);
   }
 
@@ -96,8 +100,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Initially display the first tab's content
-  document.getElementById("explore-games-content").style.display = "block";
+  // Initially display the first tab's content and set the first link as active
+  const firstNavItem = document.querySelector(".nav-item");
+  if (firstNavItem) {
+    firstNavItem.classList.add("active");
+    document.getElementById("explore-games-content").style.display = "block";
+  }
+
   function handleError(error) {
     console.error("Error:", error);
     hideLoading();
