@@ -1,0 +1,7 @@
+<div class="category-container">
+    {% for categoryName, gamesList in games %}
+        <div class="games-by-category">
+            {% include 'components/gamesSlider.html.twig' with {'title': categoryName, 'sliderPerView': 5, 'popularGames': gamesList} %}
+        </div>
+    {% endfor %}
+</div>

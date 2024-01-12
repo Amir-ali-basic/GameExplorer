@@ -1,0 +1,5 @@
+<div class="games-list" id="games-container">
+    {% for game in games %}
+        {% include 'components/gamesCard.html.twig' with {'game': game} %}
+    {% endfor %}
+</div>

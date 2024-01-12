@@ -1,0 +1,10 @@
+<div class="provaiders-container">
+    <h3 class="provaiders-title">Popular providers</h3>
+    <div class="casino-games-providers-wrapper">
+        {% for provider in providers %}
+            <div class="casino-games-providers" data-provider="{{ provider }}">
+                {{ provider }}
+            </div>
+        {% endfor %}
+    </div>
+</div>

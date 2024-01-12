@@ -1,0 +1,16 @@
+<div class="casino-filters">
+    <div class="casino-games-search-container">
+        {% include 'components/searchComponent.html.twig' with {
+            'searchId': 'casino-search-input',
+            'placeholder': 'Search games...',
+            'searchFunction': 'searchGames'
+        } %}
+    </div>
+    <div class="casino-games-dropdown">
+        <select id="category-dropdown">
+            {% for category in categories %}
+                <option class="category-dropdown-option" value="{{ category.id }}">{{ category.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>

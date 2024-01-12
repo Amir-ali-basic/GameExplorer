@@ -26,6 +26,7 @@ class CasinoGamesController extends AbstractController
         $originalCategories = $this->gameApiService->getCategories();
         $popularGames = $this->gameApiService->getGamesByCategoryId(95);
         $providersData = [];
+        $gamesByCategory = [];
         $categoriesData = [];
 
         foreach ($gamesData as $game) {
@@ -46,6 +47,7 @@ class CasinoGamesController extends AbstractController
                                 'id' => $categoryId,
                                 'title' => $categoryTitle,
                             ];
+                            $gamesByCategory[$categoryTitle][] = $game->toArray();
                         }
                     }
                 }
@@ -60,6 +62,7 @@ class CasinoGamesController extends AbstractController
             'categories' => $categoriesData,
             'popularGames' => $popularGames,
             'providers' => $providersData,
+            'gamesByCategory' => $gamesByCategory,
         ]);
     }
 
@@ -131,7 +134,6 @@ class CasinoGamesController extends AbstractController
                 }
             }
         }
-        dd($gamesByCategory);
 
         return new JsonResponse($gamesByCategory);
     }
