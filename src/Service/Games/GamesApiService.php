@@ -74,6 +74,26 @@ class GamesApiService
         }
 
         return [];
+
+    }
+    public function getGameById($id)
+    {
+        $url = 'https://casino-games-api.united-remote.dev/game/' . urlencode($id);
+        $response = $this->httpClient->request('GET', $url);
+
+        if ($response->getStatusCode() === 200) {
+            $gameData = $response->toArray();
+
+            if (!empty($gameData)) {
+                $game = new GameModel($gameData);
+                return $game;
+            } else {
+
+                throw new \Exception('No game data found for ID: ' . $id);
+            }
+        } else {
+            throw new \Exception('Failed to fetch game data for ID: ' . $id);
+        }
     }
 
 }

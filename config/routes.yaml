@@ -19,3 +19,8 @@ load_games_by_provider:
 games_filtered_by_category:
   path: /games/casino/gamesFilteredByCategory
   controller: 'App\Controller\Games\CasinoGamesController::loadAllGamesByCategory'
+play_casino_game:
+  path: "/games/casino/{id}"
+  controller: 'App\Controller\Games\CasinoGamesController::gameDetails'
+  requirements:
+  methods: ["GET"]

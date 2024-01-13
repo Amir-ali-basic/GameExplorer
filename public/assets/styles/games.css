@@ -280,3 +280,11 @@ body {
   background-color: #3498db;
   color: white;
 }
+
+.game-card {
+  transition: transform 0.2s;
+}
+
+.game-card:hover {
+  transform: scale(0.95);
+}

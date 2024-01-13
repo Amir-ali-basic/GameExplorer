@@ -137,5 +137,13 @@ class CasinoGamesController extends AbstractController
 
         return new JsonResponse($gamesByCategory);
     }
+    #[Route('/games/casino/{id}', name: 'play_casino_game')]
+    public function gameDetails(GamesApiService $gameApiService, int $id): Response
+    {
+        $gameDetails = $this->gameApiService->getGameById($id);
 
+        return $this->render('pages/games/casinoGame.html.twig', [
+            'game' => $gameDetails,
+        ]);
+    }
 }

@@ -66,16 +66,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function createGameCard(game) {
-    const gameCardDiv = document.createElement("div");
-    gameCardDiv.className = "game-card";
-    gameCardDiv.innerHTML = `<div class="game-wrapper">
-            <div class="game-image">
-                <img src="${
-                  game.icon2 ? game.icon2 : "assets/images/no-image.png"
-                }" alt="${game.name}">
-            </div>
-        </div>`;
-    return gameCardDiv;
+    const gameCardLink = document.createElement("a");
+    gameCardLink.className = "game-card";
+    gameCardLink.href = `/games/casino/${game.id}`;
+
+    const gameWrapperDiv = document.createElement("div");
+    gameWrapperDiv.className = "game-wrapper";
+
+    const gameImageDiv = document.createElement("div");
+    gameImageDiv.className = "game-image";
+
+    const gameImage = document.createElement("img");
+    gameImage.alt = game.name;
+    gameImage.src = game.icon2 ? game.icon2 : "assets/images/no-image.png";
+
+    gameImageDiv.appendChild(gameImage);
+    gameWrapperDiv.appendChild(gameImageDiv);
+    gameCardLink.appendChild(gameWrapperDiv);
+
+    return gameCardLink;
   }
 
   initializeSearchComponent(
