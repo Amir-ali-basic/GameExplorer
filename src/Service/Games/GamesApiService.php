@@ -35,65 +35,43 @@ class GamesApiService
     {
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $this->fetchFromApi('/'));
+        }, $this->fetchFromApi('/games'));
     }
 
     public function getCategories()
     {
-        return $this->fetchFromApi('/getUniqueCategoryIds');
+        return $this->fetchFromApi('/games/getUniqueCategoryIds');
     }
 
     public function getGamesByCategoryId($categoryId)
     {
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $this->fetchFromApi('/getByCategoryId/' . $categoryId));
+        }, $this->fetchFromApi('/games/getByCategoryId/' . $categoryId));
     }
 
     public function getGamesByProvider($provider)
     {
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $this->fetchFromApi('/getByProvider?provider=' . urlencode($provider)));
+        }, $this->fetchFromApi('/games/getByProvider?provider=' . urlencode($provider)));
     }
     public function getGamesByName($name)
     {
-        $url = 'https://casino-games-api.united-remote.dev/games/getByName?name=' . urlencode($name);
-        $response = $this->httpClient->request('GET', $url);
-        //error need to be handled when there is no data
-        if ($response->getStatusCode() === 200) {
-            $gamesData = $response->toArray();
+        return array_map(function ($gameData) {
+            return new GameModel($gameData);
+        }, $this->fetchFromApi('/games/getByName?name=' . urlencode($name)));
 
-            $games = [];
-            foreach ($gamesData as $gameData) {
-                $game = new GameModel($gameData);
-                $games[] = $game;
-            }
-
-            return $games;
-        }
-
-        return [];
 
     }
     public function getGameById($id)
     {
-        $url = 'https://casino-games-api.united-remote.dev/game/' . urlencode($id);
-        $response = $this->httpClient->request('GET', $url);
+        $gameData = $this->fetchFromApi('/game/' . urlencode($id));
 
-        if ($response->getStatusCode() === 200) {
-            $gameData = $response->toArray();
-
-            if (!empty($gameData)) {
-                $game = new GameModel($gameData);
-                return $game;
-            } else {
-
-                throw new \Exception('No game data found for ID: ' . $id);
-            }
+        if (!empty($gameData)) {
+            return new GameModel($gameData);
         } else {
-            throw new \Exception('Failed to fetch game data for ID: ' . $id);
+            throw new ApiException('No game data found for ID: ' . $id);
         }
     }
-
 }

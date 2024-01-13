@@ -9,8 +9,8 @@
             </div>
         {% endfor %}
     </div>
-    <div class="tab-loader" style="display: none;">Loading...</div> <!-- Loader -->
     <div class="tabs-content">
+    <div class="tab-loader" style="display: none;">Loading...</div> <!-- Loader -->
         {% for tab in tabs %}
             <div class="tab-content" id="tab-content-{{ loop.index }}" style="display: {{ loop.index == activeTabIndex ? 'block' : 'none' }}">
                 {% if tab.props is defined %}
