@@ -11,6 +11,19 @@ body {
   max-width: 1680px;
 }
 
+.casino-header-components {
+  position: relative;
+  background-image: url("../images/popular-games-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-clip: border-box;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .games-navigation {
   width: 100%;
   background-color: #191919;
@@ -24,33 +37,92 @@ body {
   height: 4rem;
   gap: 0.75rem;
 }
+
 .games-navigation .active a {
   color: white !important;
 }
+
 .games-navigation div a {
   list-style: none;
   color: #bdbdbd;
   text-decoration: none;
 }
+
+.tabs-content {
+  position: relative;
+}
+
+.tab-loader {
+  text-align: center;
+  color: #333;
+  font-size: 16px;
+  padding: 10px;
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 999;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tab-loader::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin-right: 5px;
+}
+
 .casino-filters {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 4rem;
   margin-bottom: 1.5rem;
+  width: 100%;
+  gap: 1rem;
 }
 
 .casino-games-search-container {
-  width: calc(75% - 2rem);
+  flex: 1;
 }
 
 .casino-games-search {
   width: 100%;
 }
+.clear-filters {
+  width: 10%;
+  height: 3rem;
+}
+
+.basic-button {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #191919;
+  color: #bdbdbd;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
 
 .casino-games-search #casino-search-input {
-  height: 3rem;
-  width: 100%;
+  height: calc(3rem - 2px);
+  width: calc(100% - 1rem - 2px);
   background-color: #191919;
   outline: none;
   border: none;
@@ -70,7 +142,7 @@ body {
   border-radius: 10px;
   width: 100%;
   color: #bdbdbd;
-  padding: 0.5rem 1rem;
+  padding: 0 0.5rem;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -160,18 +232,6 @@ body {
   }
 }
 
-.casino-header-components {
-  position: relative;
-  background-image: url("../images/popular-games-bg.jpg");
-  background-position: center;
-  background-size: cover;
-  background-clip: border-box;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
-}
 .slider {
   width: 100%;
 }
@@ -288,41 +348,4 @@ body {
 
 .game-card:hover {
   transform: scale(0.95);
-}
-.tabs-content {
-  position: relative;
-}
-
-.tab-loader {
-  text-align: center;
-  color: #333;
-  font-size: 16px;
-  padding: 10px;
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  z-index: 999;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.tab-loader::before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #3498db;
-  border-radius: 50%;
-  animation: spin 2s linear infinite;
-  margin-right: 5px;
 }

@@ -8,9 +8,13 @@
     </div>
     <div class="casino-games-dropdown">
         <select id="category-dropdown">
+         <option class="category-dropdown-option" value="all">All Categories</option>
             {% for category in categories %}
                 <option class="category-dropdown-option" value="{{ category.id }}">{{ category.title }}</option>
             {% endfor %}
         </select>
+    </div>
+     <div class="clear-filters">
+        <button class="basic-button" id="clear-filters-btn">Clear All Filters</button>
     </div>
 </div>

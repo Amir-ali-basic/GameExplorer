@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const categoryDropdown = document.getElementById("category-dropdown");
   const gamesContainer = document.getElementById("games-container");
   const providerElements = document.querySelectorAll(".casino-games-providers");
-  const test = document.querySelector(".csaino-games-content");
+  const clearFiltersBtn = document.getElementById("clear-filters-btn");
 
   // Event listener for category changes
   categoryDropdown.addEventListener("change", function () {
@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     element.addEventListener("click", function () {
       fetchGamesByProvider(element.getAttribute("data-provider"));
     });
+  });
+
+  // Event listener for clear filters button
+  clearFiltersBtn.addEventListener("click", function () {
+    fetchAllGames();
   });
 
   // Event listener for search
@@ -31,7 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function fetchGamesByCategory(categoryId) {
-    performFetch(`/games/casino/loadGamesByCategory/${categoryId}`);
+    if (categoryId === "all") {
+      fetchAllGames();
+    } else {
+      performFetch(`/games/casino/loadGamesByCategory/${categoryId}`);
+    }
   }
 
   function fetchGamesByProvider(providerName) {
