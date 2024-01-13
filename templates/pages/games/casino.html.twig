@@ -10,21 +10,26 @@
         {% include 'components/gamesSlider.html.twig' with {'title': 'Popular games', 'sliderPerView': 5, 'popularGames': popularGames} %}
     </div>
 
-    {% include 'components/gamesNavigation.html.twig' with {
-        'items': ['Explore games', 'Casino games', 'Favorite games'],
-        'navId': 'games-nav'
-    } %}
+   {% include 'components/tabsComponent.html.twig' with {
+        'tabs': [
+            {
+                'name': 'Explore games',
+                'template': 'components/casino/gamesExplorer.html.twig',
+                'props': {'categories': categories, 'providers': providers, 'games': games}
+            },
+            {
+                'name': 'Casino games',
+                'template': 'components/casino/casinoGames.html.twig',
+                'props': {'games': gamesByCategory}
+            },
+            {
+            'name': 'Favorite games',
+            'template': 'components/casino/favoriteGames.html.twig',
+            }
+        ],
+        'activeTabIndex': 1
+        } 
+    %}
 
-    <div class="csaino-games-content tab-content">
-        <div id="explore-games-content" class="content-section">
-            {% include 'components/casino/gamesExplorer.html.twig' with {'categories': categories, 'providers': providers, 'games': games} %}
-        </div>
-        <div id="casino-games-content" class="content-section" style="display:none">
-            {% include 'components/casino/casinoGames.html.twig' with {'games': gamesByCategory} %}
-        </div>
-        <div id="favorite-games-content" class="content-section" style="display:none">
-            Favorites
-        </div>
-    </div>
 </div>
 {% endblock %}

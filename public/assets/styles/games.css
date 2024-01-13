@@ -288,3 +288,33 @@ body {
 .game-card:hover {
   transform: scale(0.95);
 }
+
+.tab-loader {
+  text-align: center;
+  color: #333;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 10px;
+  display: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tab-loader::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  margin-right: 5px;
+}

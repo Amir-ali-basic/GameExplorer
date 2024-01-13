@@ -1,7 +1,5 @@
 import { showLoading, hideLoading } from "./globalFunctions.js";
 import { initializeSearchComponent } from "./components/searchComponent.js";
-import { initializeDropdownComponent } from "./components/dropDownComponent.js";
-import { initializeNavigationComponent } from "./components/gamesNavigationComponent.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const categoryDropdown = document.getElementById("category-dropdown");
@@ -92,29 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "Search games...",
     searchGames
   );
-
-  initializeNavigationComponent("games-nav", function (clickedItem) {
-    // Hide all content sections
-    document.querySelectorAll(".content-section").forEach((section) => {
-      section.style.display = "none";
-    });
-
-    // Show the selected content section based on clickedItem
-    if (clickedItem === "Explore games") {
-      document.getElementById("explore-games-content").style.display = "block";
-    } else if (clickedItem === "Casino games") {
-      document.getElementById("casino-games-content").style.display = "block";
-    } else if (clickedItem === "Favorite games") {
-      document.getElementById("favorite-games-content").style.display = "block";
-    }
-  });
-
-  // Initially display the first tab's content and set the first link as active
-  const firstNavItem = document.querySelector(".nav-item");
-  if (firstNavItem) {
-    firstNavItem.classList.add("active");
-    document.getElementById("explore-games-content").style.display = "block";
-  }
 
   function handleError(error) {
     console.error("Error:", error);

@@ -1,0 +1,64 @@
+{# tabsComponent.html.twig #}
+
+{% block tab_component %}
+<div class="tabs-container">
+    <div class="games-navigation" id="games-nav">
+        {% for tab in tabs %}
+            <div class="tab-item" data-tab-item="{{ tab.name }}" data-tab-target="#tab-content-{{ loop.index }}">
+                <a href="#">{{ tab.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="tab-loader" style="display: none;">Loading...</div> <!-- Loader -->
+    <div class="tabs-content">
+        {% for tab in tabs %}
+            <div class="tab-content" id="tab-content-{{ loop.index }}" style="display: {{ loop.index == activeTabIndex ? 'block' : 'none' }}">
+                {% if tab.props is defined %}
+                    {% include tab.template with tab.props %}
+                {% else %}
+                    {% include tab.template %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    function setInitialActiveTab() {
+        const activeTab = document.querySelector('#games-nav .tab-item:nth-child({{ activeTabIndex }})');
+        const activeContent = document.querySelector('#tab-content-{{ activeTabIndex }}');
+
+        if (activeTab && activeContent) {
+            activeTab.classList.add('active');
+            activeContent.style.display = 'block';
+        }
+    }
+
+    function showLoader() {
+        document.querySelector('.tab-loader').style.display = 'block';
+    }
+
+    function hideLoader() {
+        document.querySelector('.tab-loader').style.display = 'none';
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        setInitialActiveTab();
+    });
+
+    document.querySelectorAll('#games-nav .tab-item').forEach(tabItem => {
+        tabItem.addEventListener('click', (event) => {
+            event.preventDefault();
+            showLoader();
+            const target = document.querySelector(tabItem.dataset.tabTarget);
+
+            setTimeout(() => {
+                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+                document.querySelectorAll('#games-nav .tab-item').forEach(item => item.classList.remove('active'));
+                tabItem.classList.add('active');
+                target.style.display = 'block';
+                hideLoader();
+            }, 500); // Simulated loading delay
+        });
+    });
+</script>
+{% endblock %}
