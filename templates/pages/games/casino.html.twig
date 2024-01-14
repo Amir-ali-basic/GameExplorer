@@ -32,4 +32,8 @@
     %}
 
 </div>
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="module" src="{{ asset('assets/js/casinoGames.js') }}"></script>
+    {% endblock %}
 {% endblock %}

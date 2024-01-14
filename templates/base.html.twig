@@ -19,9 +19,9 @@
         {% block body %}
         {% endblock %}
 
-        <script type="module" src="{{ asset('assets/js/casinoGames.js') }}"></script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         {% block javascripts %}
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script type="module" src="{{ asset('assets/js/globalFunctions.js') }}"></script>
         {% endblock %}
     </body>
 </html>

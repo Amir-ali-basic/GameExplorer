@@ -13,4 +13,7 @@
         <img src="{{ game.background }}" alt="{{ game.title }}">
     </div>
 </div>
+    {% block javascripts %}
+        <script type="module" src="{{ asset('assets/js/globalFunctions.js') }}"></script>
+    {% endblock %}
 {% endblock %}
