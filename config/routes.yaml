@@ -24,3 +24,8 @@ play_casino_game:
   controller: 'App\Controller\Games\CasinoGamesController::gameDetails'
   requirements:
   methods: ["GET"]
+not_found:
+  path: /{url}
+  controller: App\Controller\DefaultController::notFound
+  requirements:
+    url: .+
