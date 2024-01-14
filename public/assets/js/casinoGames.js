@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gamesContainer = document.getElementById("games-container");
   const providerElements = document.querySelectorAll(".casino-games-providers");
   const clearFiltersBtn = document.getElementById("clear-filters-btn");
+  const test = document.querySelector(".csaino-games-content");
 
   // Event listener for category changes
   categoryDropdown.addEventListener("change", function () {
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function handleResponse(response) {
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      console.log("Network response was not ok");
     }
     return response.json();
   }
@@ -101,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   function handleError(error) {
-    console.error("Error:", error);
+    alert("Error:", error);
+    gamesContainer.innerHTML = "No data found";
     hideLoading();
   }
 });

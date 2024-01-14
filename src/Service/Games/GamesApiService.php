@@ -22,83 +22,52 @@ class GamesApiService
         try {
             $response = $this->httpClient->request('GET', Constants::BASE_URL . $endpoint);
             if ($response->getStatusCode() === 200) {
-                return $response->toArray(); // Return data directly
+                return $response->toArray();
             }
-            return "API Error with status code: " . $response->getStatusCode();
+            throw new ApiException("API Error with status code: " . $response->getStatusCode(), $response->getStatusCode());
         } catch (\Exception $e) {
-            return "Error fetching data: " . $e->getMessage();
+            throw new ApiException("Error fetching data: " . $e->getMessage());
         }
     }
 
+
     public function getGames()
     {
-        $response = $this->fetchFromApi('/games');
-
-        if (is_string($response)) { // Check if the response is an error message
-            return ['error' => $response];
-        }
-
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $response);
+        }, $this->fetchFromApi('/games'));
     }
 
     public function getCategories()
     {
-        $response = $this->fetchFromApi('/games/getUniqueCategoryIds');
-
-        if (is_string($response)) {
-            return ['error' => $response];
-        }
-
-        return $response;
+        return $this->fetchFromApi('/games/getUniqueCategoryIds');
     }
 
     public function getGamesByCategoryId($categoryId)
     {
-        $response = $this->fetchFromApi('/games/getByCategoryId/' . $categoryId);
-
-        if (is_string($response)) {
-            return ['error' => $response];
-        }
-
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $response);
+        }, $this->fetchFromApi('/games/getByCategoryId/' . $categoryId));
     }
 
     public function getGamesByProvider($provider)
     {
-        $response = $this->fetchFromApi('/games/getByProvider?provider=' . urlencode($provider));
-
-        if (is_string($response)) {
-            return ['error' => $response];
-        }
-
         return array_map(function ($gameData) {
             return new GameModel($gameData);
-        }, $response);
+        }, $this->fetchFromApi('/games/getByProvider?provider=' . urlencode($provider)));
     }
-
     public function getGamesByName($name)
     {
         return array_map(function ($gameData) {
             return new GameModel($gameData);
         }, $this->fetchFromApi('/games/getByName?name=' . urlencode($name)));
-    }
 
+
+    }
     public function getGameById($id)
     {
-        $response = $this->fetchFromApi('/game/' . urlencode($id));
+        $gameData = $this->fetchFromApi('/game/' . urlencode($id));
 
-        if (is_string($response)) {
-            return ['error' => $response];
-        }
-
-        if (!empty($response)) {
-            return new GameModel($response);
-        } else {
-            return ['error' => 'No game data found for ID: ' . $id];
-        }
+        return new GameModel($gameData);
     }
 }
