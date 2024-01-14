@@ -6,7 +6,7 @@
 <div class="game-details">
  <a href="{{ path('casino_games') }}" class="back-button">Go Back</a>
     <div class="game-details-background">
-        <img src="{{ game.background }}" alt="{{ game.name }}">
+        <img src="{{ game.background }}" alt="{{ game.name }}" loading="lazy">
     </div>
     <div class="game-details-content">
         <h1>{{ game.name }}</h1>
