@@ -93,7 +93,6 @@ class CasinoGamesController extends AbstractController
     public function searchGames(Request $request): JsonResponse
     {
         $searchTerm = $request->query->get('name', '');
-
         $gamesData = $this->gameApiService->getGamesByName($searchTerm);
 
         $gamesArray = array_map(function ($game) {
@@ -154,6 +153,9 @@ class CasinoGamesController extends AbstractController
     {
         $gameDetails = $this->gameApiService->getGameById($id);
 
+        if (is_array($gameDetails) && isset($gameDetails['error'])) {
+            return $this->render('pages/notFound.html.twig');
+        }
         return $this->render('pages/games/casinoGame.html.twig', [
             'game' => $gameDetails,
         ]);

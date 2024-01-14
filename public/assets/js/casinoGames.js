@@ -10,24 +10,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for category changes
   categoryDropdown.addEventListener("change", function () {
+    clearSearcInputValue();
     fetchGamesByCategory(categoryDropdown.value);
   });
 
   // Event listener for provideer
   providerElements.forEach((element) => {
     element.addEventListener("click", function () {
+      clearSearcInputValue();
       fetchGamesByProvider(element.getAttribute("data-provider"));
     });
   });
 
   // Event listener for clear filters button
   clearFiltersBtn.addEventListener("click", function () {
-    fetchAllGames();
+    clearAllFilters();
   });
 
   // Event listener for search
   function searchGames(searchText) {
-    console.log("searchText", searchText);
+    clearCategoryDropDownvalue();
     if (searchText.trim() === "") {
       fetchAllGames();
     } else {
@@ -102,8 +104,25 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
   function handleError(error) {
-    alert("Error:", error);
+    console.error("Error:", error);
     gamesContainer.innerHTML = "No data found";
     hideLoading();
+  }
+
+  function clearSearcInputValue() {
+    const searchInput = document.getElementById("casino-search-input");
+    if (searchInput) {
+      searchInput.value = "";
+    }
+  }
+
+  function clearCategoryDropDownvalue() {
+    categoryDropdown.value = "all";
+  }
+
+  function clearAllFilters() {
+    clearSearcInputValue();
+    clearCategoryDropDownvalue();
+    fetchAllGames();
   }
 });
