@@ -23,8 +23,19 @@ class CasinoGamesController extends AbstractController
     public function index(): Response
     {
         $gamesData = $this->gameApiService->getGames();
+        if (isset($gamesData['error'])) {
+            return $this->render('pages/notFound.html.twig');
+        }
         $originalCategories = $this->gameApiService->getCategories();
+        if (isset($originalCategories['error'])) {
+            return $this->render('pages/notFound.html.twig');
+        }
+
         $popularGames = $this->gameApiService->getGamesByCategoryId(95);
+        if (isset($popularGames['error'])) {
+            return $this->render('pages/notFound.html.twig');
+        }
+
         $providersData = [];
         $gamesByCategory = [];
         $categoriesData = [];
@@ -77,6 +88,7 @@ class CasinoGamesController extends AbstractController
 
         return new JsonResponse($gamesArray);
     }
+
     #[Route('/games/casino/search', name: 'search_casino_games')]
     public function searchGames(Request $request): JsonResponse
     {
@@ -145,5 +157,6 @@ class CasinoGamesController extends AbstractController
         return $this->render('pages/games/casinoGame.html.twig', [
             'game' => $gameDetails,
         ]);
+
     }
 }

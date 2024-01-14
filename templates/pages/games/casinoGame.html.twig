@@ -8,43 +8,9 @@
         <h1>{{ game.title }}</h1>
     </div>
     <div class="game-details-info">
-        <p><strong>Provider:</strong> {{ game.providerTitle }}</p>
-        <p><strong>ID:</strong> {{ game.id }}</p>
-        <p><strong>Status:</strong> {{ game.status }}</p>
-        <p><strong>Categories:</strong>
-            <ul class="categories-list">
-                {% for category in game.cats %}
-                    <li>{{ category.title }}</li>
-                {% endfor %}
-            </ul>
-        </p>
     </div>
     <div class="game-details-image">
         <img src="{{ game.background }}" alt="{{ game.title }}">
-    </div>
-    <div class="game-details-features">
-        <h2>Game Features</h2>
-        <ul class="features-list">
-            {% for feature in game.feats %}
-                <li>{{ feature }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="game-details-themes">
-        <h2>Game Themes</h2>
-        <ul class="themes-list">
-            {% for theme in game.thms %}
-                <li>{{ theme }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="game-details-types">
-        <h2>Game Types</h2>
-        <ul class="types-list">
-            {% for type in game.types %}
-                <li>{{ type }}</li>
-            {% endfor %}
-        </ul>
     </div>
 </div>
 {% endblock %}
