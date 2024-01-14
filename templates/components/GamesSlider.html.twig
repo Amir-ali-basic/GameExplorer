@@ -15,9 +15,9 @@
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var sliderPerView = {{ sliderPerView }}; 
+    const sliderPerView = {{ sliderPerView }}; 
 
-    var mySwiper = new Swiper('.mySwiper', {
+    const mySwiper = new Swiper('.mySwiper', {
       slidesPerView: sliderPerView,
       spaceBetween: 20,
       loop: true,
@@ -31,5 +31,6 @@
         prevEl: '.swiper-button-prev',
       },
     });
+    
   });
 </script>

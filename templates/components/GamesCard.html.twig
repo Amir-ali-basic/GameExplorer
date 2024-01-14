@@ -1,7 +1,10 @@
 <a href="{{ path('play_casino_game', {'id': game.id}) }}" class="game-card">
     <div class="game-wrapper">
         <div class="game-image">
-            <img src="{{ game.icon2|default(asset('assets/images/no-image.png')) }}" alt="{{ game.name }}" loading="lazy">
+            <img class="lazyload" 
+             data-src="{{ game.icon2 }}" 
+             alt="{{ game.name }}"
+        >
         </div>
     </div>
 </a>

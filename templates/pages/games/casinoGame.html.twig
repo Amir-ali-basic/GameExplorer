@@ -6,13 +6,17 @@
 <div class="game-details">
  <a href="{{ path('casino_games') }}" class="back-button">Go Back</a>
     <div class="game-details-background">
-        <img src="{{ game.background }}" alt="{{ game.name }}" loading="lazy">
+        <img class="lazyload" 
+             src="assets/images/no-image.png"
+             data-src="{{ game.background|default(asset('assets/images/no-image.png')) }}" 
+             alt="{{ game.name }}">
     </div>
     <div class="game-details-content">
         <h1>{{ game.name }}</h1>
     </div>
 </div>
-    {% block javascripts %}
-        {{ parent() }}
-    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="module" src="{{ asset('assets/js/casinoGingleGame.js') }}"></script>
+{% endblock %}
 {% endblock %}

@@ -2,6 +2,7 @@ import { showLoading, hideLoading } from "./globalFunctions.js";
 import { initializeSearchComponent } from "./components/searchComponent.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+  showLoading();
   const categoryDropdown = document.getElementById("category-dropdown");
   const gamesContainer = document.getElementById("games-container");
   const providerElements = document.querySelectorAll(".casino-games-providers");
@@ -126,3 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAllGames();
   }
 });
+
+window.onload = function () {
+  hideLoading();
+};
